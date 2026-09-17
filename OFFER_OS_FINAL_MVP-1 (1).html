@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OFFER OS — Final MVP</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--ink:#10131a;--muted:#68707d;--line:#e5e7eb;--accent:#111827;--good:#137333;--warn:#9a6700;--bad:#b42318}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
+.top{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}.topin{max-width:1180px;margin:auto;padding:15px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-weight:900;letter-spacing:2px}.tag{font-size:12px;color:var(--muted)}
+.wrap{max-width:1180px;margin:auto;padding:28px 20px 60px}.hero{background:#111827;color:white;border-radius:26px;padding:38px 34px;margin-bottom:20px}.hero h1{font-size:clamp(34px,6vw,66px);line-height:.98;margin:0 0 16px;max-width:850px;letter-spacing:-2px}.hero p{font-size:18px;color:#d1d5db;max-width:760px}.flow{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}.pill{border:1px solid #374151;padding:8px 11px;border-radius:999px;font-size:12px;color:#e5e7eb}.cta{background:#fff;color:#111827;border-radius:13px;padding:13px 18px;font-weight:800}.grid{display:grid;grid-template-columns:250px 1fr;gap:18px}.side,.card{background:var(--card);border:1px solid var(--line);border-radius:18px}.side{padding:10px;height:max-content;position:sticky;top:78px}.nav{width:100%;text-align:left;background:transparent;padding:12px;border-radius:11px;color:#374151}.nav.active{background:#111827;color:#fff;font-weight:700}.card{padding:22px;margin-bottom:16px}.card h2{margin:0 0 7px;font-size:23px}.sub{color:var(--muted);font-size:14px;line-height:1.55}.label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.7px;margin:18px 0 7px;display:block}.input,.area,.select{width:100%;border:1px solid #d9dde4;border-radius:11px;padding:12px;background:#fff;outline:none}.area{min-height:105px;resize:vertical}.input:focus,.area:focus,.select:focus{border-color:#111827}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.btn{padding:11px 14px;border-radius:10px;background:#111827;color:#fff;font-weight:700}.btn.secondary{background:#eef0f3;color:#111827}.btn.danger{background:#fff0ee;color:var(--bad)}.status{padding:11px 13px;border-radius:11px;background:#f3f4f6;margin-top:14px;font-size:13px}.good{background:#edf7ef;color:var(--good)}.warn{background:#fff8e7;color:var(--warn)}.bad{background:#fff0ee;color:var(--bad)}.item{border:1px solid var(--line);padding:13px;border-radius:12px;margin:9px 0}.item strong{display:block}.small{font-size:12px;color:var(--muted)}.score{font-size:42px;font-weight:900}.meter{height:8px;background:#e5e7eb;border-radius:20px;overflow:hidden}.meter i{display:block;height:100%;background:#111827;width:0}.hidden{display:none!important}.footer{color:var(--muted);font-size:12px;text-align:center;padding:25px}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #d6dae1;border-radius:12px}.tag2{display:inline-block;background:#f0f1f3;padding:5px 8px;border-radius:7px;font-size:11px;margin:3px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.side{position:static;display:flex;overflow:auto;gap:5px}.nav{min-width:max-content}.row{grid-template-columns:1fr}.hero{padding:28px 22px}.wrap{padding:18px 12px 45px}}
+@media print{.top,.side,.actions,.hero .cta{display:none!important}.wrap{max-width:none;padding:0}.grid{display:block}.card{break-inside:avoid}.printonly{display:block!important}}
+.printonly{display:none}
+</style>
+</head>
+<body>
+<header class="top"><div class="topin"><div class="brand">OFFER OS</div><div class="tag">Evidence-Driven Product Launch System · Final MVP</div></div></header>
+
+<div class="wrap">
+<section class="hero">
+<h1>You have an idea.<br>Should you build it?</h1>
+<p>Don't guess. Turn the idea into assumptions, tests, evidence, and a clear decision — before spending weeks building the wrong thing.</p>
+<div class="flow"><span class="pill">IDEA / ASSUMPTION</span><span class="pill">→ TEST</span><span class="pill">→ EVIDENCE</span><span class="pill">→ DECISION</span></div>
+<button class="cta" onclick="start()">START MY PROJECT →</button>
+</section>
+
+<div class="grid" id="app">
+<aside class="side">
+<button class="nav active" data-page="overview">Overview</button>
+<button class="nav" data-page="challenge">Challenge My Idea</button>
+<button class="nav" data-page="evidence">Evidence Log</button>
+<button class="nav" data-page="offer">Offer Builder</button>
+<button class="nav" data-page="experiment">Next Experiment</button>
+<button class="nav" data-page="timeline">Decision Timeline</button>
+<button class="nav" data-page="assessment">Assessment Mode</button>
+<button class="nav" data-page="report">Project Report</button>
+</aside>
+
+<main>
+<section class="page" id="overview">
+<div class="card"><h2>Project setup</h2><div class="sub">Start with the smallest useful version. Your browser saves this project on this computer.</div>
+<label class="label">Project / product name</label><input id="pname" class="input" placeholder="e.g. My digital product">
+<label class="label">One-line idea</label><textarea id="idea" class="area" placeholder="I want to help [specific segment] solve [specific problem]..."></textarea>
+<div class="actions"><button class="btn" onclick="save()">Save project</button><button class="btn secondary" onclick="go('challenge')">Challenge the idea →</button></div><div id="saveState" class="status">Not saved yet.</div></div>
+<div class="card"><h2>System status</h2><div class="row"><div><div class="score" id="readiness">0%</div><div class="sub">Evidence readiness</div></div><div><div class="score" id="eCount">0</div><div class="sub">Evidence entries</div></div></div><div class="meter"><i id="meter"></i></div><div id="overviewAdvice" class="status warn">Add your idea, then challenge the weakest assumptions.</div></div>
+</section>
+
+<section class="page hidden" id="challenge">
+<div class="card"><h2>Challenge My Idea</h2><div class="sub">This is a structured stress test. It does not predict success; it exposes assumptions that need evidence.</div>
+<div id="challengeList"></div>
+<div class="actions"><button class="btn" onclick="runChallenge()">Run challenge</button><button class="btn secondary" onclick="go('evidence')">Log evidence →</button></div>
+<div id="challengeResult"></div></div>
+</section>
+
+<section class="page hidden" id="evidence">
+<div class="card"><h2>Evidence Log</h2><div class="sub">Record behavior, not just compliments. Stronger evidence can include past behavior, workaround, money spent, time invested, access request, deposit, purchase, or repeated use.</div>
+<label class="label">What happened?</label><textarea id="evWhat" class="area" placeholder="Describe the real event."></textarea>
+<div class="row"><div><label class="label">Type</label><select id="evType" class="select"><option>Behavior</option><option>Workaround</option><option>Money spent</option><option>Time invested</option><option>Access request</option><option>Deposit / purchase</option><option>Repeated use</option><option>Opinion / compliment</option></select></div><div><label class="label">Source / context</label><input id="evSource" class="input" placeholder="Interview, pilot, message, usage..."></div></div>
+<label class="label">Supports or contradicts what?</label><input id="evImpact" class="input" placeholder="e.g. They have this problem and will take action.">
+<div class="actions"><button class="btn" onclick="addEvidence()">Add evidence</button></div>
+<div id="evidenceList"></div></div>
+</section>
+
+<section class="page hidden" id="offer">
+<div class="card"><h2>Offer Builder</h2><div class="sub">Define the transition: current state → observable outcome, through a clear mechanism and concrete deliverables.</div>
+<label class="label">Who is this for?</label><input id="segment" class="input">
+<label class="label">Current state / problem</label><textarea id="problem" class="area"></textarea>
+<label class="label">Observable outcome</label><textarea id="outcome" class="area"></textarea>
+<label class="label">Mechanism</label><textarea id="mechanism" class="area" placeholder="How does your solution create the transition?"></textarea>
+<label class="label">Concrete deliverables</label><textarea id="deliverables" class="area"></textarea>
+<div class="row"><div><label class="label">Not included</label><textarea id="notincluded" class="area"></textarea></div><div><label class="label">First 15-minute action</label><textarea id="first15" class="area"></textarea></div></div>
+<label class="label">Support model / limits</label><textarea id="support" class="area"></textarea>
+<div class="actions"><button class="btn" onclick="saveOffer()">Save offer</button><button class="btn secondary" onclick="go('experiment')">Design next experiment →</button></div><div id="offerState"></div></div>
+</section>
+
+<section class="page hidden" id="experiment">
+<div class="card"><h2>Next Experiment</h2><div class="sub">The system picks a practical next move from the weakest missing evidence. One major variable at a time.</div>
+<div id="nextMove" class="status warn"></div>
+<label class="label">Test</label><textarea id="test" class="area" placeholder="What will you do?"></textarea>
+<label class="label">Observable signal</label><textarea id="signal" class="area" placeholder="What behavior would count as evidence?"></textarea>
+<label class="label">Decision rule</label><textarea id="decisionRule" class="area" placeholder="If the signal appears / does not appear, what will you do?"></textarea>
+<label class="label">Review date</label><input id="reviewDate" class="input" type="date">
+<div class="actions"><button class="btn" onclick="saveExperiment()">Save experiment</button></div><div id="expState"></div></div>
+</section>
+
+<section class="page hidden" id="timeline">
+<div class="card"><h2>Decision Timeline</h2><div class="sub">Keep a traceable record of what you believed, tested, learned, and changed.</div>
+<label class="label">Decision</label><textarea id="decText" class="area" placeholder="Continue, revise, retest, or pause — and why?"></textarea>
+<label class="label">Evidence behind it</label><textarea id="decEvidence" class="area"></textarea>
+<label class="label">One major change</label><textarea id="decChange" class="area"></textarea>
+<label class="label">Next review date</label><input id="decDate" class="input" type="date">
+<div class="actions"><button class="btn" onclick="addDecision()">Record decision</button></div><div id="timelineList"></div></div>
+</section>
+
+<section class="page hidden" id="assessment">
+<div class="card"><h2>Assessment Mode</h2><div class="sub">A reviewer can inspect whether the project has documented evidence and decision logic. This is an assessment aid, not a formal certification.</div>
+<div id="assessmentChecks"></div>
+<div class="actions"><button class="btn" onclick="refresh()">Refresh assessment</button><button class="btn secondary" onclick="window.print()">Print assessment</button></div></div>
+</section>
+
+<section class="page hidden" id="report">
+<div class="card"><h2>Project Report</h2><div class="sub">A printable snapshot of the project record. Use it for review, handoff, or your own decision process.</div>
+<div id="reportBox"></div>
+<div class="actions"><button class="btn" onclick="window.print()">Print / Save as PDF</button></div></div>
+</section>
+</main></div>
+<div class="footer">OFFER OS Final MVP · Local-first prototype · Data stays in this browser unless you export/print it.</div>
+</div>
+
+<script>
+const K='offer_os_final_v1';
+let S=JSON.parse(localStorage.getItem(K)||'null')||{name:'',idea:'',offer:{},evidence:[],experiments:[],decisions:[]};
+function $(id){return document.getElementById(id)}
+function persist(){localStorage.setItem(K,JSON.stringify(S));refresh()}
+function save(){S.name=$('pname').value.trim();S.idea=$('idea').value.trim();persist();$('saveState').className='status good';$('saveState').textContent='Saved on this computer ✓'}
+function load(){ $('pname').value=S.name||'';$('idea').value=S.idea||''; let o=S.offer||{}; ['segment','problem','outcome','mechanism','deliverables','notincluded','first15','support'].forEach(x=>$(x).value=o[x]||''); if(S.experiments[0]){let e=S.experiments[0];$('test').value=e.test||'';$('signal').value=e.signal||'';$('decisionRule').value=e.rule||'';$('reviewDate').value=e.date||''} renderEvidence();renderTimeline();refresh()}
+function go(page){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(page).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===page));if(page==='challenge')renderChallenge();if(page==='assessment'||page==='report')refresh()}
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>go(b.dataset.page));
+function start(){document.getElementById('app').scrollIntoView({behavior:'smooth'});go('overview')}
+function renderChallenge(){let checks=[
+['Specific segment','Your audience is specific enough to interview and observe.'],
+['Real problem','The problem describes a concrete situation, not only a desire.'],
+['Observable outcome','The outcome can be seen or verified.'],
+['Alternative','You know what people currently do instead.'],
+['Commitment','You have a way to test real commitment, not just interest.'],
+['Boundaries','The offer states what is not included.']
+];$('challengeList').innerHTML=checks.map((c,i)=>`<div class="item"><strong>${c[0]}</strong><span class="small">${c[1]}</span></div>`).join('')}
+function runChallenge(){let o=S.offer||{}, checks=[
+['Specific segment',!!o.segment&&o.segment.length>5,'Define a narrower segment.'],
+['Real problem',!!o.problem&&o.problem.length>20,'Describe the last real incident and what they did.'],
+['Observable outcome',!!o.outcome&&o.outcome.length>10,'Make the result observable.'],
+['Alternative',false,'Record what they currently use/do instead.'],
+['Commitment',S.evidence.some(e=>['Deposit / purchase','Access request','Repeated use'].includes(e.type)), 'Test a real commitment.'],
+['Boundaries',!!o.notincluded&&o.notincluded.length>5,'State what is not included.']
+];let bad=checks.filter(x=>!x[1]);$('challengeResult').innerHTML=bad.length?`<div class="status warn"><b>${bad.length} challenge point(s) need evidence or definition.</b><ul>${bad.map(x=>`<li>${x[0]} — ${x[2]}</li>`).join('')}</ul></div>`:`<div class="status good"><b>No obvious missing challenge fields.</b> Keep testing against real behavior.</div>`}
+function addEvidence(){let w=$('evWhat').value.trim();if(!w)return alert('Write what happened first.');S.evidence.unshift({what:w,type:$('evType').value,source:$('evSource').value.trim(),impact:$('evImpact').value.trim(),date:new Date().toLocaleDateString()});$('evWhat').value='';$('evSource').value='';$('evImpact').value='';persist()}
+function renderEvidence(){let a=S.evidence||[];$('evidenceList').innerHTML=a.length?a.map((e,i)=>`<div class="item"><strong>${e.type}</strong><div>${esc(e.what)}</div><div class="small">${esc(e.source)} · ${e.date}</div>${e.impact?`<div class="small">Impact: ${esc(e.impact)}</div>`:''}</div>`).join(''):'<div class="empty">No evidence logged yet.</div>'}
+function saveOffer(){S.offer={};['segment','problem','outcome','mechanism','deliverables','notincluded','first15','support'].forEach(x=>S.offer[x]=$(x).value.trim());persist();$('offerState').innerHTML='<div class="status good">Offer saved ✓</div>'}
+function next(){let o=S.offer||{},e=S.evidence||[];if(!S.idea)return['Start with the idea','Write the one-line idea before testing anything.'];if(!o.segment||!o.problem)return['Validate the problem','Define a specific segment and document a recent real problem.'];if(!o.outcome||!o.deliverables)return['Clarify the offer','Define an observable outcome and concrete deliverables.'];if(!o.notincluded)return['Set boundaries','State what the offer does not include.'];if(!e.length)return['Collect behavioral evidence','Run interviews or another real-world test and log what happened.'];if(!e.some(x=>x.type==='Deposit / purchase'||x.type==='Access request'))return['Test real commitment','Look for an access request, deposit, purchase, or another meaningful commitment.'];return['Run the next experiment','Choose the weakest assumption and test one major variable at a time.']}
+function saveExperiment(){S.experiments.unshift({test:$('test').value.trim(),signal:$('signal').value.trim(),rule:$('decisionRule').value.trim(),date:$('reviewDate').value});persist();$('expState').innerHTML='<div class="status good">Experiment saved ✓</div>'}
+function addDecision(){let d=$('decText').value.trim();if(!d)return alert('Write the decision first.');S.decisions.unshift({decision:d,evidence:$('decEvidence').value.trim(),change:$('decChange').value.trim(),date:$('decDate').value||new Date().toISOString().slice(0,10)});['decText','decEvidence','decChange','decDate'].forEach(x=>$(x).value='');persist()}
+function renderTimeline(){let a=S.decisions||[];$('timelineList').innerHTML=a.length?a.map(d=>`<div class="item"><strong>${esc(d.decision)}</strong><div class="small">${d.date}</div><div>${esc(d.evidence)}</div>${d.change?`<div class="small">Change: ${esc(d.change)}</div>`:''}</div>`).join(''):'<div class="empty">No decisions recorded yet.</div>'}
+function assessment(){let o=S.offer||{}, checks=[
+['Idea recorded',!!S.idea],['Specific segment',!!o.segment],['Problem defined',!!o.problem],['Observable outcome',!!o.outcome],['Concrete deliverables',!!o.deliverables],['Boundaries',!!o.notincluded],['Evidence log',S.evidence.length>0],['Real commitment evidence',S.evidence.some(e=>['Deposit / purchase','Access request','Repeated use'].includes(e.type))],['Experiment recorded',S.experiments.length>0],['Decision trail',S.decisions.length>0]
+];let done=checks.filter(x=>x[1]).length;$('assessmentChecks').innerHTML=`<div class="score">${done}/${checks.length}</div><div class="sub">Documented checkpoints completed</div>`+checks.map(x=>`<div class="item">${x[1]?'✓':'○'} <b>${x[0]}</b><span class="small"> ${x[1]?'documented':'still missing'}</span></div>`).join('')}
+function report(){let o=S.offer||{};$('reportBox').innerHTML=`<div class="printonly"><h1>OFFER OS — Project Report</h1></div><div class="item"><strong>Project</strong>${esc(S.name||'Untitled')}</div><div class="item"><strong>Idea</strong>${esc(S.idea||'Not recorded')}</div><div class="item"><strong>Offer</strong><br>For: ${esc(o.segment||'—')}<br>Problem: ${esc(o.problem||'—')}<br>Outcome: ${esc(o.outcome||'—')}<br>Mechanism: ${esc(o.mechanism||'—')}<br>Deliverables: ${esc(o.deliverables||'—')}<br>Not included: ${esc(o.notincluded||'—')}<br>First 15 min: ${esc(o.first15||'—')}<br>Support: ${esc(o.support||'—')}</div><div class="item"><strong>Evidence (${S.evidence.length})</strong>${S.evidence.map(e=>`<p><b>${esc(e.type)}:</b> ${esc(e.what)} <span class="small">(${esc(e.source)})</span></p>`).join('')||'None recorded.'}</div><div class="item"><strong>Experiments</strong>${S.experiments.map(e=>`<p><b>Test:</b> ${esc(e.test)}<br><b>Signal:</b> ${esc(e.signal)}<br><b>Rule:</b> ${esc(e.rule)}<br><span class="small">${e.date}</span></p>`).join('')||'None recorded.'}</div><div class="item"><strong>Decision timeline</strong>${S.decisions.map(d=>`<p><b>${esc(d.date)} — ${esc(d.decision)}</b><br>${esc(d.evidence)}<br><span class="small">Change: ${esc(d.change)}</span></p>`).join('')||'None recorded.'}</div>`}
+function refresh(){let o=S.offer||{},score=0,fields=[S.idea,o.segment,o.problem,o.outcome,o.deliverables,o.notincluded,S.evidence.length,S.experiments.length,S.decisions.length];score=Math.round(fields.filter(x=>x&&((typeof x==='number')?x>0:x.length>0)).length/fields.length*100);$('readiness').textContent=score+'%';$('meter').style.width=score+'%';$('eCount').textContent=S.evidence.length;let n=next();$('overviewAdvice').className='status '+(score>=80?'good':'warn');$('overviewAdvice').textContent=n[0]+': '+n[1];$('nextMove').textContent=n[0]+' — '+n[1];assessment();report();renderEvidence();renderTimeline()}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+load();
+</script>
+</body></html>

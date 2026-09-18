@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mohamedsalahr2x-png.github.io/offer-os/sitemap.xml

@@ -16,6 +16,48 @@ button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
 </style>
 </head>
 <body>
+  <header class="brand-header">
+  <img src="logo.png" alt="OFFER OS Logo" class="brand-logo">
+  <div class="brand-name">OFFER OS</div>
+</header>
+
+<style>
+  .brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 28px 20px 20px;
+  }
+
+  .brand-logo {
+    width: 58px;
+    height: 58px;
+    object-fit: contain;
+    display: block;
+  }
+
+  .brand-name {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .brand-header {
+      padding-top: 20px;
+    }
+
+    .brand-logo {
+      width: 48px;
+      height: 48px;
+    }
+
+    .brand-name {
+      font-size: 21px;
+    }
+  }
+</style>
 <header class="top"><div class="topin"><div class="brand">OFFER OS</div><div class="tag">Evidence-Driven Product Launch System · Final MVP</div></div></header>
 
 <div class="wrap">
